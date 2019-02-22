@@ -44,10 +44,19 @@ Background.prototype.draw = function () {
 			this.game.ctx.font = "30px Verdana";
 			this.game.ctx.fillStyle = "#FFFFFF";
 			this.game.ctx.fillText("Wave 2", 350, 400);
+		} else if (this.game.wave3) {
+			this.game.ctx.font = "30px Verdana";
+			this.game.ctx.fillStyle = "#FFFFFF";
+			this.game.ctx.fillText("Wave 3", 350, 400);
 		} else if (this.game.gameOver) {
 			this.game.ctx.font = "30px Verdana";
 			this.game.ctx.fillStyle = "#FFFFFF";
 			this.game.ctx.fillText("Game Over", 350, 360);
+			this.game.ctx.fillText("Press R to Restart", 300, 400);
+		} else if (this.game.gameWon) {
+			this.game.ctx.font = "30px Verdana";
+			this.game.ctx.fillStyle = "#FFFFFF";
+			this.game.ctx.fillText("You have survived!", 300, 360);
 			this.game.ctx.fillText("Press R to Restart", 300, 400);
 		}
 		
@@ -474,6 +483,14 @@ Hero.prototype.update = function() {
 	this.boundingBox = new BoundingBox(this.x, this.y, this.width - 100, this.height);
 	
 	if (this.game.wave2) this.game.wave2 = false;
+	if (this.game.wave3) this.game.wave3 = false;
+	
+	if (this.kills === 45) {
+		this.game.wave3 = true;
+		this.game.wave1 = false;
+		this.game.wave2 = false;
+		this.game.createWaveThree();
+	}
 	
 	if (this.kills === 20) {
 		this.game.wave2 = true;
@@ -481,6 +498,10 @@ Hero.prototype.update = function() {
 		this.game.createWaveTwo();
 	}
 	
+	if (this.game.getZombieNumbers() === 0) {
+		this.game.gameWon = true;
+		backgroundMusic.stop();
+	}
 	
 	if (this.health < 1) {
 		this.dead = true;

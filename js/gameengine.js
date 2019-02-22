@@ -141,7 +141,11 @@ GameEngine.prototype.createMap = function() {
 	this.createTile(this.getTile(this.getPlatformLength() - 1).x 
 						+ this.getWidth(this.getPlatformLength() - 1) + 250, 680, 20);
 	this.createTile(this.getTile(this.getPlatformLength() - 1).x 
-						+ this.getWidth(this.getPlatformLength() - 1) + 250, 680, 15);					
+						+ this.getWidth(this.getPlatformLength() - 1) + 250, 680, 15);
+	this.createTile(this.getTile(this.getPlatformLength() - 1).x 
+						+ this.getWidth(this.getPlatformLength() - 1) + 250, 510, 15);	
+	this.createTile(this.getTile(this.getPlatformLength() - 1).x 
+						+ this.getWidth(this.getPlatformLength() - 1) + 250, 680, 20);							
 }
 
 
@@ -223,6 +227,26 @@ GameEngine.prototype.createWaveOne = function() {
 		speed += speed;
 	} 
 	
+	
+	// sixth tile
+	distance = -35;
+	pos = this.getTile(5).x + this.getWidth(5) - 200;
+	speed = 0.005;
+	for (var i = 1; i <= 15; i++) {
+		this.createZombie(pos + (i * distance), this.getBoundingTop(5), -1, LEVEL_ONE_SPEED);
+		this.zombies[this.getZombieNumbers() - 1].speed += 0.005 + speed;
+		speed += speed;
+	} 
+	
+	// seventh tile
+	distance = -35;
+	pos = this.getTile(6).x + this.getWidth(6) - 200;
+	speed = 0.004;
+	for (var i = 1; i <= 20; i++) {
+		this.createZombie(pos + (i * distance), this.getBoundingTop(6), -1, LEVEL_ONE_SPEED);
+		this.zombies[this.getZombieNumbers() - 1].speed += 0.004 + speed;
+		speed += speed;
+	} 
 }
 
 /** Helper method to create Wave 2 of the zombie apocalypse.*/
@@ -231,6 +255,18 @@ GameEngine.prototype.createWaveTwo = function() {
 	for (var i = 0; i < this.zombies.length; i++) {
 		var zombie = this.zombies[i];
 		zombie.speed += 0.03;
+	}
+	
+}
+
+
+/** Helper method to create Wave 3 of the zombie apocalypse.*/
+GameEngine.prototype.createWaveThree = function() {
+	
+	for (var i = 0; i < this.zombies.length; i++) {
+		var zombie = this.zombies[i];
+		zombie.speed += 0.001;
+		zombie.damage +=0.003;
 	}
 	
 }

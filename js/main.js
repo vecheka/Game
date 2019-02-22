@@ -116,12 +116,14 @@ AM.downloadAll(function () {
     gameEngine.init(ctx);
 	gameEngine.startGame = false;
 	gameEngine.gameOver = false;
+	gameEngine.gameWon = false;
 	gameEngine.wave1 = false;
 	gameEngine.wave2 = false;
+	gameEngine.wave3 = false;
 	startInput();
 	
 	gameEngine.Camera = Camera;
-	gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/bg_city.png"), 0, 0, 20, 35));
+	gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/bg_city.png"), 0, 0, 20, 50));
 
 	
 	gameEngine.createHero();
@@ -198,8 +200,8 @@ function startInput() {
 				gameEngine.Hero.shoot = true;
 				break;
 			case 82: // restart game
-				if (gameEngine.gameOver) {
-					
+				if (gameEngine.gameOver || gameEngine.gameWon) {
+					gameEngine.gameWon = false;
 					restartGame();
 					gameEngine.Hero.reset();
 					startGame();
