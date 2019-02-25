@@ -265,8 +265,8 @@ GameEngine.prototype.createWaveThree = function() {
 	
 	for (var i = 0; i < this.zombies.length; i++) {
 		var zombie = this.zombies[i];
-		zombie.speed += 0.001;
-		zombie.damage +=0.003;
+		zombie.speed += 0.0005;
+		zombie.damage +=0.002;
 	}
 	
 }
