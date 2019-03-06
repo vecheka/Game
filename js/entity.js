@@ -396,6 +396,7 @@ Zombie.prototype.update = function() {
 	
 	if (this.pause) {
 		this.walk = false;
+		this.attack = false;
 		return;
 	}
 	// get current platform of the zombie
