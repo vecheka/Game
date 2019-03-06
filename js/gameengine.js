@@ -74,7 +74,7 @@ GameEngine.prototype.loop = function () {
 }
 
 /** Helper method to create hero.*/
-GameEngine.prototype.createHero = function() {
+GameEngine.prototype.createHero = function(x, y) {
 	var animationSprites = [];
 	animationSprites["jump"] = AM.getAsset("./img/jump.png");
 	animationSprites["jumpb"] = AM.getAsset("./img/jumpB.png");
@@ -92,7 +92,7 @@ GameEngine.prototype.createHero = function() {
 	animationSprites["hurtb"] = AM.getAsset("./img/hurtB.png");
 	animationSprites["dead"] = AM.getAsset("./img/defeated.png");
 	animationSprites["deadb"] = AM.getAsset("./img/defeatedB.png");
-	var hero = new Hero(gameEngine, animationSprites, 0, 0);
+	var hero = new Hero(gameEngine, animationSprites, x, y);
 	gameEngine.Hero = hero;
 }
 
@@ -265,8 +265,8 @@ GameEngine.prototype.createWaveThree = function() {
 	
 	for (var i = 0; i < this.zombies.length; i++) {
 		var zombie = this.zombies[i];
-		zombie.speed += 0.0005;
-		zombie.damage +=0.002;
+		zombie.speed += 0.001;
+		zombie.damage +=0.003;
 	}
 	
 }
