@@ -9,6 +9,8 @@
 	
 	<title>Zombie Apocalypse</title>
 	
+	<script type="text/javascript" src="http://24.16.255.56:8888/socket.io/socket.io.js"></script>
+	<script  src="js/database.js"></script>
 	<script  src="js/sound.js"></script>
     <script  src="js/assetManager.js"></script>
     <script  src="js/gameengine.js"></script>
@@ -30,13 +32,13 @@
 			
 		}
 		
-		<!-- #background { -->
-			<!-- background-image: url("img/bg.png"); -->
-			<!-- background-size: cover; -->
-			<!-- background-repeat: no-repeat; -->
-			<!-- background-position: center center; -->
-		<!-- } -->
-	
+		#instruction {
+			font-weight: bold;
+		}
+		
+		#instruction ul{
+			list-style: none;
+		}
 		
 	</style>
 	
@@ -54,7 +56,19 @@
 		
 	</div>
 	
-  
+	<!-- <div id = "instruction"> -->
+		<!-- <p>   -->
+			<!-- Gameplay: Side scrolling zombie shooting game, with three waves. Give your best shot at surviving! -->
+		<!-- </p> -->
+		<!-- Controls: -->
+		
+			<!-- <ul> W or w: Jump</ul> -->
+			<!-- <ul> A or a: Walk Backward</ul> -->
+			<!-- <ul> D or d: Walk Forward</ul> -->
+			<!-- <ul> Space:  Shoot</ul> -->
+		
+		
+	<!-- </div> -->
 			
   
   

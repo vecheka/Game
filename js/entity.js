@@ -3,7 +3,7 @@ function Background(game, spritesheet, x, y, speed, numberOfRepeats) {
     this.animation = new Animation(spritesheet, 480, 800, 1, 0.1, 1, true, 1);
     this.spritesheet = spritesheet;
     this.speed = speed;
-	// this.ctx = game.ctx;
+	this.ctx = game.ctx;
 	this.game = game;
 	this.numberOfRepeats = numberOfRepeats;
 	
@@ -28,11 +28,107 @@ Background.prototype.draw = function () {
 			this.x - this.game.Camera.x + (i * this.animation.frameWidth / 2), this.y);
 	} 
 	
-	if (!this.game.startGame) {
-		this.game.ctx.font = "30px Verdana";
-		this.game.ctx.fillStyle = "#FFFFFF";
-		this.game.ctx.fillText("Press S to Start", 275, 400);
+	if (!this.game.startGame & !this.game.showSetting && !this.game.showCredit) {
+		
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.playButton.x, this.game.playButton.y, this.game.playButton.width, 
+									this.game.playButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("START", 355, 325);
+		
+		// load button
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.loadButton.x, this.game.loadButton.y, this.game.loadButton.width, 
+									this.game.loadButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("LOAD", 360, 365);
+		
+		// setting button
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.settingButton.x, this.game.settingButton.y, this.game.settingButton.width, 
+									this.game.settingButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("SETTING", 340, 405);
+		
+		// credit button
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.creditButton.x, this.game.creditButton.y, this.game.creditButton.width, 
+									this.game.creditButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("CREDIT", 347, 445);
+		
+	} else if (this.game.pauseGame & !this.game.showSetting && !this.game.showCredit) { // pause menu
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.resumeButton.x, this.game.resumeButton.y, this.game.resumeButton.width, 
+									this.game.resumeButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("RESUME", 345, 325);
+		
+		// load button
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.loadButton.x, this.game.loadButton.y, this.game.loadButton.width, 
+									this.game.loadButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("LOAD", 360, 365);
+		
+		// save button
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.saveButton.x, this.game.saveButton.y, this.game.saveButton.width, 
+									this.game.saveButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("SAVE", 360, 405);
+		
+		// setting button
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.settingButton.x, this.game.settingButton.y, this.game.settingButton.width, 
+									this.game.settingButton.height, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "25px Verdana";
+		this.ctx.fillText("SETTING", 340, 445);
+	} else if (this.game.showSetting) {
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, 220, 200, 350, 250, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "15px Verdana";
+		this.ctx.fillText("A/a: Move Backward", 310, 230);
+		this.ctx.fillText("D/d: Move Forward", 310, 260);
+		this.ctx.fillText("W/w: Jump", 310, 290);
+		this.ctx.fillText("Space: Shoot", 310, 320);
+		this.ctx.fillText("Esc: Pause", 310, 350);
+		// this.ctx.fillText("X: Jump", 310, 380);
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.gobackButton.x, this.game.gobackButton.y, this.game.gobackButton.width, 
+									this.game.gobackButton.height, 5, true, true);
+		this.ctx.font = "20px Verdana";
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.fillText("Go Back", 360, 422);
+	} else if (this.game.showCredit) {
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, 220, 200, 350, 100, 5, true, true);
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.font = "15px Verdana";
+		this.ctx.fillText("Developed By: Vecheka Chhourn", 275, 230);
+		
+		this.ctx.fillStyle = "#254042";
+		roundRect(this.ctx, this.game.gobackButton.x, this.game.gobackButton.y, this.game.gobackButton.width, 
+									this.game.gobackButton.height, 5, true, true);
+		this.ctx.font = "20px Verdana";
+		this.ctx.fillStyle = "#DAFEFF";
+		this.ctx.fillText("Go Back", 350, 280);
 	} else {
+		
+		if (this.game.loaded) {
+			this.game.ctx.font = "30px Verdana";
+			this.game.ctx.fillStyle = "#FFFFFF";
+			this.game.ctx.fillText(LOAD_MESSAGE, 350, 400);
+		}
 		
 		if (this.game.wave1) {
 			
@@ -44,10 +140,19 @@ Background.prototype.draw = function () {
 			this.game.ctx.font = "30px Verdana";
 			this.game.ctx.fillStyle = "#FFFFFF";
 			this.game.ctx.fillText("Wave 2", 350, 400);
+		} else if (this.game.wave3) {
+			this.game.ctx.font = "30px Verdana";
+			this.game.ctx.fillStyle = "#FFFFFF";
+			this.game.ctx.fillText("Wave 3", 350, 400);
 		} else if (this.game.gameOver) {
 			this.game.ctx.font = "30px Verdana";
 			this.game.ctx.fillStyle = "#FFFFFF";
 			this.game.ctx.fillText("Game Over", 350, 360);
+			this.game.ctx.fillText("Press R to Restart", 300, 400);
+		} else if (this.game.gameWon) {
+			this.game.ctx.font = "30px Verdana";
+			this.game.ctx.fillStyle = "#FFFFFF";
+			this.game.ctx.fillText("You have survived!", 300, 360);
 			this.game.ctx.fillText("Press R to Restart", 300, 400);
 		}
 		
@@ -65,6 +170,137 @@ Background.prototype.draw = function () {
 	
     Entity.prototype.draw.call(this);
 }
+
+
+/** Play button class.*/
+function PlayButton(x, y, width, height) {
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.boundingbox = new BoundingBox(x, y, width, height);
+}
+
+PlayButton.prototype.isClick = function(pos) {
+    return pos.x > this.x && pos.x < this.x+this.width && pos.y < this.y+this.height && pos.y > this.y;
+}
+
+
+/** Setting button class.*/
+function SettingButton(x, y, width, height) {
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.boundingbox = new BoundingBox(x, y, width, height);
+}
+
+SettingButton.prototype.isClick = function(pos) {
+    return pos.x > this.x && pos.x < this.x+this.width && pos.y < this.y+this.height && pos.y > this.y;
+}
+
+/** Load button class.*/
+function LoadButton(x, y, width, height) {
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.boundingbox = new BoundingBox(x, y, width, height);
+}
+
+LoadButton.prototype.isClick = function(pos) {
+    return pos.x > this.x && pos.x < this.x+this.width && pos.y < this.y+this.height && pos.y > this.y;
+}
+
+/** Save button class.*/
+function SaveButton(x, y, width, height) {
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.boundingbox = new BoundingBox(x, y, width, height);
+}
+
+SaveButton.prototype.isClick = function(pos) {
+    return pos.x > this.x && pos.x < this.x+this.width && pos.y < this.y+this.height && pos.y > this.y;
+}
+
+/** Resume button class.*/
+function ResumeButton(x, y, width, height) {
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.boundingbox = new BoundingBox(x, y, width, height);
+}
+
+ResumeButton.prototype.isClick = function(pos) {
+    return pos.x > this.x && pos.x < this.x+this.width && pos.y < this.y+this.height && pos.y > this.y;
+}
+
+/** Credit button class.*/
+function CreditButton(x, y, width, height) {
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.boundingbox = new BoundingBox(x, y, width, height);
+}
+
+CreditButton.prototype.isClick = function(pos) {
+    return pos.x > this.x && pos.x < this.x+this.width && pos.y < this.y+this.height && pos.y > this.y;
+}
+
+/** Go Back button class.*/
+function GoBackButton(x, y, width, height) {
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.boundingbox = new BoundingBox(x, y, width, height);
+}
+
+GoBackButton.prototype.isClick = function(pos) {
+    return pos.x > this.x && pos.x < this.x+this.width && pos.y < this.y+this.height && pos.y > this.y;
+}
+
+
+// draw rounding corner rectangle.. Source: https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-on-html-canvas
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+	if (typeof stroke == 'undefined') {
+		stroke = true;
+	}
+	if (typeof radius === 'undefined') {
+		radius = 5;
+	}
+	if (typeof radius === 'number') {
+		radius = {tl: radius, tr: radius, br: radius, bl: radius};
+	} else {
+		var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+		for (var side in defaultRadius) {
+		  radius[side] = radius[side] || defaultRadius[side];
+		}
+	}
+	ctx.beginPath();
+	ctx.moveTo(x + radius.tl, y);
+	ctx.lineTo(x + width - radius.tr, y);
+	ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+	ctx.lineTo(x + width, y + height - radius.br);
+	ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+	ctx.lineTo(x + radius.bl, y + height);
+	ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+	ctx.lineTo(x, y + radius.tl);
+	ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+	ctx.closePath();
+	if (fill) {
+		ctx.fill();
+	}
+	if (stroke) {
+		ctx.stroke();
+	}
+
+}
+
 
 /** Tiles Class.*/
 function Tile(game, spriteSheet, frameX, frameY, width, height, x, y, numberOfTiles) {
@@ -143,7 +379,9 @@ function Zombie(game, spriteSheet, x, y, direction, speed) {
 	this.hurt = false;
 	this.health = 100;
 	this.speed = speed;
+	this.pause = false;
 	// this.isOnEdge = false;
+	this.currentPlatform;
 	this.boundingBox = new BoundingBox(this.x, this.y, this.width, this.height);
 	Entity.call(this, game, this.x, this.y);
 }
@@ -151,9 +389,15 @@ function Zombie(game, spriteSheet, x, y, direction, speed) {
 Zombie.prototype = new Entity();
 Zombie.prototype.constructor = Zombie;
 
+
+
 Zombie.prototype.update = function() {
 	this.boundingBox = new BoundingBox(this.x, this.y, this.width, this.height);
 	
+	if (this.pause) {
+		this.walk = false;
+		return;
+	}
 	// get current platform of the zombie
 	for (var i = 0; i < this.game.platforms.length; i++) {
 		var tile = this.game.platforms[i];
@@ -473,7 +717,16 @@ Hero.prototype.reset = function() {
 Hero.prototype.update = function() {
 	this.boundingBox = new BoundingBox(this.x, this.y, this.width - 100, this.height);
 	
+	
 	if (this.game.wave2) this.game.wave2 = false;
+	if (this.game.wave3) this.game.wave3 = false;
+	
+	if (this.kills === 45) {
+		this.game.wave3 = true;
+		this.game.wave1 = false;
+		this.game.wave2 = false;
+		this.game.createWaveThree();
+	}
 	
 	if (this.kills === 20) {
 		this.game.wave2 = true;
@@ -481,6 +734,10 @@ Hero.prototype.update = function() {
 		this.game.createWaveTwo();
 	}
 	
+	if (this.game.getZombieNumbers() === 0) {
+		this.game.gameWon = true;
+		backgroundMusic.stop();
+	}
 	
 	if (this.health < 1) {
 		this.dead = true;
