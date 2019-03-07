@@ -244,7 +244,7 @@ GameEngine.prototype.createWaveOne = function() {
 	speed = 0.004;
 	for (var i = 1; i <= 20; i++) {
 		this.createZombie(pos + (i * distance), this.getBoundingTop(6), -1, LEVEL_ONE_SPEED);
-		this.zombies[this.getZombieNumbers() - 1].speed += 0.004 + speed;
+		this.zombies[this.getZombieNumbers() - 1].speed += 0.0001;
 		speed += speed;
 	} 
 }
@@ -265,7 +265,7 @@ GameEngine.prototype.createWaveThree = function() {
 	
 	for (var i = 0; i < this.zombies.length; i++) {
 		var zombie = this.zombies[i];
-		zombie.speed += 0.001;
+		zombie.speed += 0.005;
 		zombie.damage +=0.003;
 	}
 	
